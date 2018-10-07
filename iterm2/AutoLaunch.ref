@@ -1,0 +1,43 @@
+set topLeftcmd to ""
+set topRightcmd to ""
+set bottomLeftcmd to ""
+set bottomRightcmd to ""
+
+tell application "iTerm"
+	activate
+	tell current window
+		create tab with default profile
+	end tell
+	
+	tell application "System Events" to keystroke "d" using {shift down, command down}
+	delay 0.5
+	
+	-- Sends command to bottom left pane
+	tell current session of current window
+		write text bottomLeftcmd
+	end tell
+	tell application "System Events" to keystroke "d" using {command down}
+	delay 0.5
+	
+	-- Sends command to bottom right pane
+	tell current session of current window
+		write text bottomRightcmd
+	end tell
+	tell application "System Events" to keystroke "]" using {command down}
+	delay 0.5
+	
+	-- Sends command to top left pane
+	tell current session of current window
+		write text topLeftcmd
+	end tell
+	tell application "System Events" to keystroke "d" using {command down}
+	delay 0.5
+	
+	-- Sends command to top right pane
+	tell current session of current window
+		write text topRightcmd
+	end tell
+	
+	-- Returns foucs to top left pane
+	tell application "System Events" to keystroke "[" using {command down}
+end tell
